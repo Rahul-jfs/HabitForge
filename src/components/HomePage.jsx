@@ -21,15 +21,17 @@ const HomePage = () => {
     <div>
       <div className="m-2 p-2 flex justify-between">
         <h1 className="font-bold text-2xl">Welcome</h1>
-        <button
-          className="bg-red-600 px-4 py-1 rounded text-white cursor-pointer hover:bg-red-700"
-          onClick={() => {
-            setHabits([]);
-            localStorage.removeItem("habits");
-          }}
-        >
-          Clear Habits
-        </button>
+        {habits.length === 0 ? null : (
+          <button
+            className="bg-red-600 px-4 py-1 rounded text-white cursor-pointer hover:bg-red-700"
+            onClick={() => {
+              setHabits([]);
+              localStorage.removeItem("habits");
+            }}
+          >
+            Clear Habits
+          </button>
+        )}
       </div>
       <div>
         <HabitForm setHabits={setHabits} />

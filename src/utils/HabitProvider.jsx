@@ -1,11 +1,33 @@
-import { useState } from "react";
-// import { useAuth } from "./AuthContext";
+import { useEffect, useState } from "react";
+import { useAuth } from "./AuthContext";
 import { v4 as uuid } from "uuid";
 import { HabitContext } from "./HabitContext";
 
 export const HabitProvider = ({ children }) => {
-  // const { currentUser } = useAuth();
-  const [habits, setHabits] = useState([]);
+  const { currentUser } = useAuth();
+  const [habits, setHabits] = useState(() => {
+    const saved = currentUser?.phone
+      ? localStorage.getItem(`habits_${currentUser.phone}`)
+      : null;
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  useEffect(() => {
+    if (currentUser) {
+      const stored =
+        JSON.parse(localStorage.getItem(`habits_${currentUser.phone}`)) || [];
+      setHabits(stored);
+    }
+  }, [currentUser]);
+
+  useEffect(() => {
+    if (currentUser) {
+      localStorage.setItem(
+        `habits_${currentUser.phone}`,
+        JSON.stringify(habits)
+      );
+    }
+  }, [currentUser, habits]);
 
   const addHabit = ({ name, category, color }) => {
     const newHabit = {

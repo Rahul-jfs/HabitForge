@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useAuth } from "../utils/AuthContext";
 import { useNavigate } from "react-router";
+import ThemeButton from "./ThemeButton";
+import { useTheme } from "../utils/ThemeContext";
 
 export default function LoginPage() {
   const { login } = useAuth();
@@ -9,6 +11,7 @@ export default function LoginPage() {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const { darkMode } = useTheme();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -25,13 +28,17 @@ export default function LoginPage() {
   };
 
   return (
-    <>
+    <div>
       <div
-        className={`min-h-screen flex items-center justify-center bg-gray-100 p-6`}
+        className={`min-h-screen flex items-center justify-center bg-gray-100 p-6  ${
+          darkMode ? "dark" : ""
+        }`}
       >
         <form
           onSubmit={handleLogin}
-          className={`bg-white p-6 rounded shadow-md w-full max-w-md`}
+          className={`bg-white p-6 rounded shadow-md w-full max-w-md ${
+            darkMode ? "dark containerDark" : ""
+          }`}
         >
           <h2 className="text-2xl font-bold mb-4">Login / Sign Up</h2>
           <input
@@ -54,6 +61,9 @@ export default function LoginPage() {
           </button>
         </form>
       </div>
-    </>
+      <div className="absolute top-5 right-5">
+        <ThemeButton />
+      </div>
+    </div>
   );
 }

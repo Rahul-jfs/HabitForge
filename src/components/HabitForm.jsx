@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { useHabit } from "../utils/HabitContext";
+import { useTheme } from "../utils/ThemeContext";
 
 const HabitForm = () => {
   const [name, setName] = useState("");
@@ -8,6 +9,7 @@ const HabitForm = () => {
   const [color, setColor] = useState("#22c55e");
 
   const { addHabit } = useHabit();
+  const { darkMode } = useTheme();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,7 +24,9 @@ const HabitForm = () => {
 
   return (
     <form
-      className="shadow-lg rounded m-3 p-3 flex gap-2"
+      className={`shadow-lg rounded p-3 flex gap-2 ${
+        darkMode ? "dark containerDark" : ""
+      }`}
       onSubmit={handleSubmit}
     >
       <input

@@ -1,4 +1,5 @@
 import { useHabit } from "../utils/HabitContext";
+import { useTheme } from "../utils/ThemeContext";
 
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
@@ -6,9 +7,13 @@ const HabitCard = ({ habit }) => {
   const { toggleDay, removeHabit } = useHabit();
   const streak = Object.values(habit.progress).filter(Boolean).length;
 
+  const { darkMode } = useTheme();
+
   return (
     <div
-      className={`bg-white p-4 rounded shadow flex flex-col md:flex-row justify-between items-center `}
+      className={`bg-white p-4 rounded shadow flex flex-col md:flex-row justify-between items-center ${
+        darkMode ? "dark containerDark" : ""
+      } `}
     >
       <div className="flex items-center gap-4">
         <div
@@ -28,7 +33,7 @@ const HabitCard = ({ habit }) => {
             key={day}
             onClick={() => toggleDay(habit.id, day)}
             className={`w-8 h-8 rounded-full text-xs font-bold cursor-pointer ${
-              habit.progress[day] ? "bg-green-500 text-white" : "bg-gray-200"
+              habit.progress[day] ? "bg-green-500 text-white" : "bg-gray-300"
             }`}
           >
             {day[0]}

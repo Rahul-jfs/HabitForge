@@ -3,19 +3,22 @@ import LoginPage from "./components/LoginPage";
 import { AuthProvider } from "./utils/AuthProvider";
 import { HabitProvider } from "./utils/HabitProvider";
 import Dashboard from "./components/Dashboard";
+import ThemeProvider from "./utils/ThemeProvider";
 
 const App = () => {
   return (
-    <AuthProvider>
-      <HabitProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<LoginPage />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-          </Routes>
-        </BrowserRouter>
-      </HabitProvider>
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <HabitProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<LoginPage />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+            </Routes>
+          </BrowserRouter>
+        </HabitProvider>
+      </AuthProvider>
+    </ThemeProvider>
   );
 };
 

@@ -3,16 +3,21 @@ import { useHabit } from "../utils/HabitContext";
 import HabitCard from "../components/HabitCard";
 import HabitForm from "../components/HabitForm";
 import { useNavigate } from "react-router";
-// import { useTheme } from "../utils/ThemeContext";
+import { useTheme } from "../utils/ThemeContext";
+import ThemeButton from "./ThemeButton";
 
 export default function Dashboard() {
   const { logout, currentUser } = useAuth();
   const { habits, clearHabits } = useHabit();
   const navigate = useNavigate();
-  //   const { darkMode, toggleMode } = useTheme();
+  const { darkMode } = useTheme();
 
   return (
-    <div className={`p-4 bg-gray-50 min-h-screen`}>
+    <div
+      className={`p-4 bg-gray-50 min-h-screen ${
+        darkMode ? "dark containerDark" : ""
+      }`}
+    >
       <header className="flex justify-between items-center mb-4">
         <h1 className="text-xl font-bold">Welcome, {currentUser.phone}</h1>
         <div className="space-x-2">
@@ -33,6 +38,7 @@ export default function Dashboard() {
           >
             Logout
           </button>
+          <ThemeButton />
         </div>
       </header>
       <HabitForm />

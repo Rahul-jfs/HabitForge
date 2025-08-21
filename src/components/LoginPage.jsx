@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../utils/AuthContext";
 import { useNavigate } from "react-router";
 
-export default function LoginForm() {
+export default function LoginPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
 

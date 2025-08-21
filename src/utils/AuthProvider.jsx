@@ -4,7 +4,7 @@ import { AuthContext } from "./AuthContext";
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(() =>
     JSON.parse(localStorage.getItem("currentUser"))
-  );    
+  );
 
   const login = (phone, password) => {
     const users = JSON.parse(localStorage.getItem("users")) || [];

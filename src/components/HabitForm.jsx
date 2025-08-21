@@ -1,36 +1,36 @@
 import { useState } from "react";
-import { v4 as uuid } from "uuid";
 
-const HabitForm = ({ setHabits }) => {
-  const [habit, setHabit] = useState("");
+import { useHabit } from "../utils/HabitContext";
+
+const HabitForm = () => {
+  const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [color, setColor] = useState("#22c55e");
 
-  const handleSubmit = () => {
-    if (habit === "" || category === "") {
+  const { addHabit } = useHabit();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (name === "" || category === "") {
       return;
     }
-    const newHabit = {
-      id: uuid(),
-      name: habit,
-      category: category,
-      color: color,
-    };
-    setHabits((prev) => [...prev, newHabit]);
-
-    setHabit("");
+    addHabit({ name, category, color });
+    setName("");
     setCategory("");
     setColor("#22c55e");
   };
 
   return (
-    <div className="shadow-lg rounded m-3 p-3 flex gap-2">
+    <form
+      className="shadow-lg rounded m-3 p-3 flex gap-2"
+      onSubmit={handleSubmit}
+    >
       <input
         type="text"
         placeholder="Habit Name"
         className="flex-1 border rounded-md p-1"
-        value={habit}
-        onChange={(e) => setHabit(e.target.value)}
+        value={name}
+        onChange={(e) => setName(e.target.value)}
       />
       <input
         type="text"
@@ -53,7 +53,7 @@ const HabitForm = ({ setHabits }) => {
       >
         Add Habit
       </button>
-    </div>
+    </form>
   );
 };
 

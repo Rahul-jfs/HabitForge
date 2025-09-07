@@ -47,6 +47,7 @@ export default function LoginPage() {
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             className="w-full p-2 mb-3 border rounded"
+            autoComplete="tel"
           />
           <input
             type="password"
@@ -54,6 +55,7 @@ export default function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="w-full p-2 mb-3 border rounded"
+            autoComplete="new-password"
           />
           {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
           <button className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">

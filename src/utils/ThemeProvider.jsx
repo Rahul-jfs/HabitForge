@@ -4,7 +4,7 @@ import { ThemeContext } from "./ThemeContext";
 const ThemeProvider = ({ children }) => {
   const [darkMode, setDarkMode] = useState(() => {
     const savedTheme = localStorage.getItem("theme");
-    return savedTheme ? savedTheme : false;
+    return savedTheme === "true";
   });
 
   const toggleTheme = () => {
@@ -12,7 +12,7 @@ const ThemeProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    localStorage.setItem("theme", JSON.parse(darkMode));
+    localStorage.setItem("theme", darkMode);
   }, [darkMode]);
 
   return (

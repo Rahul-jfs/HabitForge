@@ -16,7 +16,7 @@ const App = () => {
     <ThemeProvider>
       <AuthProvider>
         <HabitProvider>
-          <BrowserRouter>
+          <BrowserRouter basename="/HabitForge">
             <Routes>
               <Route path="/" element={<LoginPage />} />
               <Route

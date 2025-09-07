@@ -4,7 +4,7 @@ import { ThemeContext } from "./ThemeContext";
 const ThemeProvider = ({ children }) => {
   const [darkMode, setDarkMode] = useState(() => {
     const savedTheme = localStorage.getItem("theme");
-    return savedTheme ? JSON.parse(savedTheme) : false;
+    return savedTheme ? savedTheme : false;
   });
 
   const toggleTheme = () => {
